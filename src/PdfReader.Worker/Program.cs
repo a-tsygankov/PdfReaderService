@@ -7,6 +7,7 @@ using PdfReader.Api.Infrastructure;
 using PdfReader.Api.Options;
 using PdfReader.Core;
 using Serilog;
+using PdfReader.Worker;
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 

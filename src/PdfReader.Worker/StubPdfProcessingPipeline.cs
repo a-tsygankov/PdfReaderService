@@ -10,6 +10,7 @@ namespace PdfReader.Worker;
 /// </summary>
 public sealed class StubPdfProcessingPipeline : IPdfProcessingPipeline
 {
+    /// <inheritdoc/>
     public Task<PdfProcessingResult> ProcessAsync(Stream pdf, string? formType, CancellationToken ct = default)
     {
         // NOTE: This is just a placeholder. It does NOT inspect the PDF.

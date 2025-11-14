@@ -15,8 +15,8 @@
         <SerilogSinksConsoleVersion>5.0.1</SerilogSinksConsoleVersion>
         <SerilogSettingsConfigurationVersion>9.0.0</SerilogSettingsConfigurationVersion>
 
-        <EfCoreVersion>9.0.0</EfCoreVersion>
-        <NpgsqlEfCoreVersion>9.0.0</NpgsqlEfCoreVersion>
+        <EfCoreVersion>9.0.11</EfCoreVersion>
+        <NpgsqlEfCoreVersion>9.0.11</NpgsqlEfCoreVersion>
         <RabbitMqClientVersion>6.8.1</RabbitMqClientVersion>
     </PropertyGroup>
     <PropertyGroup>
