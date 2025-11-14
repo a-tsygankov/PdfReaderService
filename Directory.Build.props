@@ -3,7 +3,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <LangVersion>preview</LangVersion>
+        <LangVersion>13</LangVersion>
 
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -11,12 +11,15 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <SerilogAspNetCoreVersion>8.0.0</SerilogAspNetCoreVersion>
+        <SerilogAspNetCoreVersion>9.0.0</SerilogAspNetCoreVersion>
         <SerilogSinksConsoleVersion>5.0.1</SerilogSinksConsoleVersion>
-        <SerilogSettingsConfigurationVersion>8.0.0</SerilogSettingsConfigurationVersion>
+        <SerilogSettingsConfigurationVersion>9.0.0</SerilogSettingsConfigurationVersion>
 
-        <EfCoreVersion>9.0.0-preview.1.24157.4</EfCoreVersion>
-        <NpgsqlEfCoreVersion>9.0.0-preview.1</NpgsqlEfCoreVersion>
+        <EfCoreVersion>9.0.0</EfCoreVersion>
+        <NpgsqlEfCoreVersion>9.0.0</NpgsqlEfCoreVersion>
         <RabbitMqClientVersion>6.8.1</RabbitMqClientVersion>
+    </PropertyGroup>
+    <PropertyGroup>
+        <NoWarn>$(NoWarn);CS1591</NoWarn>
     </PropertyGroup>
 </Project>
