@@ -1,0 +1,22 @@
+<Project>
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>preview</LangVersion>
+
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <AnalysisLevel>latest</AnalysisLevel>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <SerilogAspNetCoreVersion>8.0.0</SerilogAspNetCoreVersion>
+        <SerilogSinksConsoleVersion>5.0.1</SerilogSinksConsoleVersion>
+        <SerilogSettingsConfigurationVersion>8.0.0</SerilogSettingsConfigurationVersion>
+
+        <EfCoreVersion>9.0.0-preview.1.24157.4</EfCoreVersion>
+        <NpgsqlEfCoreVersion>9.0.0-preview.1</NpgsqlEfCoreVersion>
+        <RabbitMqClientVersion>6.8.1</RabbitMqClientVersion>
+    </PropertyGroup>
+</Project>

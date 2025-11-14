@@ -1,0 +1,75 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: pdfreader-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: pdfreader
+      POSTGRES_PASSWORD: pdfreader
+      POSTGRES_DB: pdfreader
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: pdfreader-rabbitmq
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    container_name: pdfreader-api
+    restart: always
+    depends_on:
+      - postgres
+      - rabbitmq
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__Default: "Host=postgres;Port=5432;Database=pdfreader;Username=pdfreader;Password=pdfreader"
+      Queue__HostName: "rabbitmq"
+      Queue__UserName: "guest"
+      Queue__Password: "guest"
+      Queue__QueueName: "pdfreader.documents"
+      Storage__BasePath: "/data/storage"
+    ports:
+      - "8080:8080"
+    volumes:
+      - storage_data:/data/storage
+
+  worker:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.worker
+    container_name: pdfreader-worker
+    restart: always
+    depends_on:
+      - postgres
+      - rabbitmq
+    environment:
+      DOTNET_ENVIRONMENT: "Development"
+      ConnectionStrings__Default: "Host=postgres;Port=5432;Database=pdfreader;Username=pdfreader;Password=pdfreader"
+      Queue__HostName: "rabbitmq"
+      Queue__UserName: "guest"
+      Queue__Password: "guest"
+      Queue__QueueName: "pdfreader.documents"
+      Storage__BasePath: "/data/storage"
+    volumes:
+      - storage_data:/data/storage
+
+volumes:
+  postgres_data:
+  rabbitmq_data:
+  storage_data:

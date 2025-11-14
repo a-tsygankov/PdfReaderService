@@ -1,0 +1,24 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /src
+
+COPY ./Directory.Build.props ./
+COPY ./PdfReaderService.sln ./PdfReaderService.sln
+COPY ./src/PdfReader.Core/PdfReader.Core.csproj ./src/PdfReader.Core/
+COPY ./src/PdfReader.Api/PdfReader.Api.csproj ./src/PdfReader.Api/
+COPY ./src/PdfReader.Worker/PdfReader.Worker.csproj ./src/PdfReader.Worker/
+
+RUN dotnet restore ./PdfReaderService.sln
+
+COPY ./src ./src
+RUN dotnet publish ./src/PdfReader.Worker/PdfReader.Worker.csproj -c Release -o /app/publish /p:UseAppHost=false
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/runtime:9.0 AS runtime
+WORKDIR /app
+
+RUN mkdir -p /data/storage
+
+COPY --from=build /app/publish ./
+
+ENTRYPOINT ["dotnet", "PdfReader.Worker.dll"]
