@@ -67,3 +67,97 @@ Swagger UI: `http://localhost:8080/swagger`
 - Open `.windsurf/workspace.code-workspace`.
 - Default solution: `PdfReaderService.sln`.
 - Use your preferred run/debug configuration.
+
+### macOS Developer Workflow
+
+#### Initial Setup on macOS
+
+```bash
+brew install --cask rancher-desktop
+brew install docker docker-compose
+```
+
+#### Switch Rancher Desktop to dockerd
+
+Open Rancher Desktop → Preferences → Kubernetes → Container Runtime:
+```
+✔ dockerd
+❌ containerd
+```
+
+#### Build the project
+
+```bash
+./scripts/build.sh
+```
+
+#### Run everything
+
+```bash
+./scripts/run.sh
+```
+
+#### Stop everything
+
+```bash
+./scripts/stop.sh
+```
+
+#### View logs
+
+```bash
+./scripts/logs.sh api
+./scripts/logs.sh worker
+./scripts/logs.sh postgres
+./scripts/logs.sh rabbitmq
+```
+
+### Scripts for macOS + Rancher Desktop
+
+All scripts under:
+
+```bash
+scripts/
+    build.sh
+    run.sh
+    stop.sh
+    clean.sh
+    logs.sh
+```
+
+Each script is multilayered to support:
+Docker Desktop
+Rancher Desktop (containerd or dockerd mode)
+
+Example for run.sh:
+
+```bash
+#!/bin/bash
+set -e
+echo "Starting full stack (API + Worker + PostgreSQL + RabbitMQ)..."
+docker compose up -d --build
+```
+
+Example for build.sh:
+
+```bash
+#!/bin/bash
+set -e
+
+echo "Building containers..."
+docker compose build
+```
+
+Example for stop.sh:
+
+```bash
+#!/bin/bash
+docker compose down
+```
+
+Example for clean.sh:
+
+```bash
+#!/bin/bash
+docker compose down -v
+docker system prune -af
