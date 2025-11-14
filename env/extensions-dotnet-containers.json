@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "ms-dotnettools.csharp",
+    "formulahendry.code-runner",
+    "humao.rest-client",
+    "eamodio.gitlens",
+    "ms-vscode.vscode-browser-debug",
+    "johnpapa.vscode-azurefunctions",
+    "ms-azuretools.vscode-docker",
+    "PeterJausovec.vscode-docker",
+    "ms-vscode-remote.remote-containers",
+    "redhat.vscode-yaml",
+    "yzhang.markdown-all-in-one"
+  ],
+  "unwantedRecommendations": []
+}
